@@ -1,2 +1,91 @@
-body { margin: 20px; }
-textarea, button, audio { display: block; margin: 10px 0; }
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background: linear-gradient(135deg, #ff6f61, #6b48ff);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    color: #fff;
+}
+
+.container {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 500px;
+    text-align: center;
+}
+
+h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.voice-select {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.9);
+    font-size: 1em;
+    color: #333;
+    cursor: pointer;
+}
+
+textarea {
+    width: 100%;
+    height: 150px;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.9);
+    font-size: 1em;
+    color: #333;
+    resize: none;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.generate-btn {
+    padding: 15px 30px;
+    border: none;
+    border-radius: 25px;
+    background: #ff6f61;
+    color: white;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.2s;
+}
+
+.generate-btn:hover {
+    transform: scale(1.05);
+    background: #ff8a80;
+}
+
+audio {
+    width: 100%;
+    margin-top: 20px;
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.2));
+}
+
+.loading {
+    margin-top: 20px;
+    font-size: 1.2em;
+    color: #fff;
+    animation: spin 1s infinite linear;
+}
+
+.hidden {
+    display: none;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

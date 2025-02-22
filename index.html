@@ -1,13 +1,26 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <title>빠른 TTS</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TTS Vibe</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <textarea id="textInput" rows="5" placeholder="SSML 입력"></textarea>
-  <button id="generateBtn">생성</button>
-  <audio id="audioPlayer" controls></audio>
-  <script src="script.js"></script>
+    <div class="container">
+        <h1>TTS Vibe 🎙️</h1>
+        <select id="voiceSelect" class="voice-select">
+            <option value="ko-KR-Wavenet-A">목소리 1 (여성, 기본)</option>
+            <option value="ko-KR-Wavenet-B">목소리 2 (남성)</option>
+            <option value="ko-KR-Wavenet-C">목소리 3 (여성)</option>
+            <option value="ko-KR-Wavenet-D">목소리 4 (남성)</option>
+        </select>
+        <textarea id="textInput" placeholder="SSML 입력 (예: <speak>안녕!</speak>)"></textarea>
+        <button id="generateBtn" class="generate-btn">🎵 생성</button>
+        <audio id="audioPlayer" controls></audio>
+        <div id="loading" class="loading hidden">🔄 생성 중...</div>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>
