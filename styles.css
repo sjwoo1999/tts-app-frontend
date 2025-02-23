@@ -1,6 +1,6 @@
 body {
   font-family: 'Noto Sans KR', sans-serif;
-  background: #1a1a1a;
+  background: #0f1419; /* 트위터 스타일 다크 톤 */
   min-height: 100vh;
   margin: 0;
   display: flex;
@@ -10,30 +10,38 @@ body {
 }
 
 .container {
-  background: #2c2c2c;
-  border-radius: 15px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  background: #1c2526; /* 살짝 밝은 다크 톤 */
+  border-radius: 20px;
+  box-shadow: 0 12px 50px rgba(0, 0, 0, 0.6);
   width: 90%;
-  max-width: 600px; /* 편집기 공간 확보 */
+  max-width: 600px;
   padding: 40px 30px;
   text-align: center;
 }
 
 .title {
-  font-size: 2.5em;
-  color: #ffcc00;
-  margin-bottom: 25px;
+  font-size: 2.8em;
+  color: #00ddeb; /* 네온 블루로 VOXIFY 강조 */
+  margin-bottom: 10px;
   font-weight: 700;
-  letter-spacing: -0.5px;
+  letter-spacing: -1px;
+  text-transform: uppercase;
+}
+
+.slogan {
+  font-size: 1.1em;
+  color: #ff2e63; /* 네온 핑크로 포인트 */
+  margin-bottom: 25px;
+  font-weight: 400;
 }
 
 .voice-select {
   width: 100%;
-  padding: 12px 15px;
+  padding: 14px 15px;
   margin-bottom: 20px;
   border: none;
-  border-radius: 10px;
-  background: #3a3a3a;
+  border-radius: 12px;
+  background: #283135;
   font-size: 1em;
   color: #fff;
   outline: none;
@@ -44,7 +52,7 @@ body {
 }
 
 .voice-select:focus {
-  box-shadow: 0 0 0 2px #ff6f61;
+  box-shadow: 0 0 0 2px #00ddeb;
 }
 
 .ssml-editor {
@@ -63,22 +71,22 @@ body {
   min-width: 200px;
   padding: 12px;
   border: none;
-  border-radius: 10px;
-  background: #3a3a3a;
+  border-radius: 12px;
+  background: #283135;
   font-size: 1em;
   color: #fff;
   outline: none;
 }
 
 .text-input:focus {
-  box-shadow: 0 0 0 2px #ff6f61;
+  box-shadow: 0 0 0 2px #00ddeb;
 }
 
 .rate-select, .emphasis-select {
   padding: 12px;
   border: none;
-  border-radius: 10px;
-  background: #3a3a3a;
+  border-radius: 12px;
+  background: #283135;
   font-size: 1em;
   color: #fff;
   outline: none;
@@ -89,40 +97,41 @@ body {
   width: 80px;
   padding: 12px;
   border: none;
-  border-radius: 10px;
-  background: #3a3a3a;
+  border-radius: 12px;
+  background: #283135;
   font-size: 1em;
   color: #fff;
   outline: none;
 }
 
 .break-input:focus {
-  box-shadow: 0 0 0 2px #ff6f61;
+  box-shadow: 0 0 0 2px #00ddeb;
 }
 
 .add-segment {
   width: 100%;
-  padding: 10px;
+  padding: 12px;
   border: none;
-  border-radius: 10px;
-  background: #ff6f61;
+  border-radius: 12px;
+  background: #ff2e63;
   color: #fff;
   font-size: 1em;
   cursor: pointer;
+  font-weight: 700;
 }
 
 .add-segment:hover {
-  background: #ff8a80;
+  background: #ff577f;
 }
 
 .generate-btn {
   width: 100%;
-  padding: 14px;
+  padding: 16px;
   border: none;
-  border-radius: 10px;
-  background: linear-gradient(90deg, #ff6f61, #6b48ff);
+  border-radius: 12px;
+  background: linear-gradient(90deg, #00ddeb, #ff2e63); /* 네온 블루-핑크 */
   color: #fff;
-  font-size: 1.2em;
+  font-size: 1.3em;
   font-weight: 700;
   cursor: pointer;
   text-transform: uppercase;
@@ -130,31 +139,31 @@ body {
 }
 
 .generate-btn:hover {
-  background: linear-gradient(90deg, #ff8a80, #896bff);
+  background: linear-gradient(90deg, #40e5f0, #ff577f);
 }
 
 .generate-btn:disabled {
-  background: #4a4a4a;
+  background: #3a3a3a;
   cursor: not-allowed;
 }
 
 audio {
   width: 100%;
   margin-top: 25px;
-  background: #3a3a3a;
-  border-radius: 10px;
+  background: #283135;
+  border-radius: 12px;
   padding: 5px;
 }
 
 audio::-webkit-media-controls-panel {
-  background: #3a3a3a;
+  background: #283135;
   color: #fff;
 }
 
 .loading {
   margin-top: 20px;
   font-size: 1.2em;
-  color: #ffcc00;
+  color: #00ddeb;
   font-weight: 700;
 }
 
