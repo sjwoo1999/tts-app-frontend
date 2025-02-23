@@ -3,29 +3,36 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>VOXIFY</title>
+  <title>SONICVIBE</title>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <div class="container">
-    <h1 class="title">VOXIFY 🎙️</h1>
-    <p class="slogan">너의 목소리를 힙하게 증폭시켜!</p>
+    <h1 class="title">SONICVIBE 🎵</h1>
+    <p class="slogan">소리의 독창적 파동으로 너의 목소리를 새롭게 표현!</p>
+    <select id="languageSelect" class="voice-select">
+      <option value="ko-KR">한국어</option>
+      <option value="en-US">영어</option>
+      <option value="ja-JP">일본어</option>
+    </select>
     <select id="voiceSelect" class="voice-select">
       <option value="ko-KR-Wavenet-A">목소리 1 (남성)</option>
       <option value="ko-KR-Wavenet-B">목소리 2 (남성)</option>
       <option value="ko-KR-Wavenet-C">목소리 3 (여성)</option>
-      <option value="ko-KR-Wavenet-D">목소리 4 (여성)</option>
+      <option value="en-US-Wavenet-D">영어 목소리 1 (남성)</option>
+      <option value="ja-JP-Wavenet-A">일본어 목소리 1 (여성)</option>
     </select>
 
     <div class="ssml-editor">
       <div class="segment" data-id="1">
-        <input type="text" class="text-input" placeholder="텍스트 입력" value="어? 밥만 먹었는데 왜 갑자기 눈이 감기지? 이거 혹시 혈당 스파이크?"/>
+        <input type="text" class="text-input" placeholder="텍스트 입력" value="어? 밥만 먹었는데 왜 갑자기 눈이 감기지?"/>
         <select class="rate-select">
-          <option value="1.05" selected>빠르게</option>
-          <option value="1.0">보통</option>
-          <option value="0.95">느리게</option>
+          <option value="1.0" selected>보통</option>
+          <option value="1.1">빠르게</option>
+          <option value="0.9">느리게</option>
         </select>
+        <input type="number" class="pitch-input" step="0.1" min="-20.0" max="20.0" value="0.0" placeholder="피치 (-20~20)"/>
         <select class="emphasis-select">
           <option value="none" selected>없음</option>
           <option value="reduced">약하게</option>
@@ -46,6 +53,7 @@
     const generateBtn = document.getElementById('generateBtn');
     const audioPlayer = document.getElementById('audioPlayer');
     const voiceSelect = document.getElementById('voiceSelect');
+    const languageSelect = document.getElementById('languageSelect');
     const loading = document.getElementById('loading');
     const editor = document.querySelector('.ssml-editor');
     const addSegmentBtn = document.querySelector('.add-segment');
@@ -61,9 +69,10 @@
         <input type="text" class="text-input" placeholder="텍스트 입력"/>
         <select class="rate-select">
           <option value="1.0" selected>보통</option>
-          <option value="1.05">빠르게</option>
-          <option value="0.95">느리게</option>
+          <option value="1.1">빠르게</option>
+          <option value="0.9">느리게</option>
         </select>
+        <input type="number" class="pitch-input" step="0.1" min="-20.0" max="20.0" value="0.0" placeholder="피치 (-20~20)"/>
         <select class="emphasis-select">
           <option value="none" selected>없음</option>
           <option value="reduced">약하게</option>
@@ -79,10 +88,12 @@
       const segments = Array.from(document.querySelectorAll('.segment')).map(segment => ({
         text: segment.querySelector('.text-input').value,
         rate: segment.querySelector('.rate-select').value,
+        pitch: segment.querySelector('.pitch-input').value || '0.0',
         emphasis: segment.querySelector('.emphasis-select').value,
         break: segment.querySelector('.break-input').value
       }));
       const voice = voiceSelect.value;
+      const language = languageSelect.value;
 
       loading.classList.remove('hidden');
       generateBtn.disabled = true;
@@ -93,7 +104,7 @@
           {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ segments, voice })
+            body: JSON.stringify({ segments, voice, language })
           }
         );
         if (!response.ok) throw new Error('응답 실패');
