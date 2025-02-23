@@ -1,6 +1,6 @@
 body {
   font-family: 'Noto Sans KR', sans-serif;
-  background: #1a1a1a; /* 다크 모드 배경, MZ 감성 */
+  background: #1a1a1a;
   min-height: 100vh;
   margin: 0;
   display: flex;
@@ -10,21 +10,21 @@ body {
 }
 
 .container {
-  background: #2c2c2c; /* 살짝 밝은 다크 톤 */
+  background: #2c2c2c;
   border-radius: 15px;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
   width: 90%;
-  max-width: 480px; /* 슬림한 폭으로 트렌디하게 */
+  max-width: 600px; /* 편집기 공간 확보 */
   padding: 40px 30px;
   text-align: center;
 }
 
 .title {
   font-size: 2.5em;
-  color: #ffcc00; /* 네온 옐로우로 힙한 포인트 */
+  color: #ffcc00;
   margin-bottom: 25px;
   font-weight: 700;
-  letter-spacing: -0.5px; /* 타이트한 간격으로 모던함 */
+  letter-spacing: -0.5px;
 }
 
 .voice-select {
@@ -33,11 +33,10 @@ body {
   margin-bottom: 20px;
   border: none;
   border-radius: 10px;
-  background: #3a3a3a; /* 다크 톤 입력 필드 */
+  background: #3a3a3a;
   font-size: 1em;
   color: #fff;
   outline: none;
-  appearance: none; /* 기본 셀렉트 스타일 제거 */
   cursor: pointer;
   background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="white" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>');
   background-repeat: no-repeat;
@@ -45,30 +44,75 @@ body {
 }
 
 .voice-select:focus {
-  box-shadow: 0 0 0 2px #ff6f61; /* 포커스 시 네온 코럴 */
+  box-shadow: 0 0 0 2px #ff6f61;
 }
 
-textarea {
-  width: 100%;
-  height: 160px;
-  padding: 15px;
+.ssml-editor {
   margin-bottom: 20px;
+}
+
+.segment {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.text-input {
+  flex: 1;
+  min-width: 200px;
+  padding: 12px;
   border: none;
   border-radius: 10px;
   background: #3a3a3a;
   font-size: 1em;
   color: #fff;
   outline: none;
-  resize: none;
-  line-height: 1.5; /* 가독성 향상 */
 }
 
-textarea:focus {
+.text-input:focus {
   box-shadow: 0 0 0 2px #ff6f61;
 }
 
-textarea::placeholder {
-  color: #a0a0a0; /* 부드러운 회색으로 힙한 느낌 */
+.rate-select, .emphasis-select {
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  background: #3a3a3a;
+  font-size: 1em;
+  color: #fff;
+  outline: none;
+  cursor: pointer;
+}
+
+.break-input {
+  width: 80px;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  background: #3a3a3a;
+  font-size: 1em;
+  color: #fff;
+  outline: none;
+}
+
+.break-input:focus {
+  box-shadow: 0 0 0 2px #ff6f61;
+}
+
+.add-segment {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  background: #ff6f61;
+  color: #fff;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+.add-segment:hover {
+  background: #ff8a80;
 }
 
 .generate-btn {
@@ -76,17 +120,17 @@ textarea::placeholder {
   padding: 14px;
   border: none;
   border-radius: 10px;
-  background: linear-gradient(90deg, #ff6f61, #6b48ff); /* 코럴-퍼플 그라데이션 */
+  background: linear-gradient(90deg, #ff6f61, #6b48ff);
   color: #fff;
   font-size: 1.2em;
   font-weight: 700;
   cursor: pointer;
-  text-transform: uppercase; /* 트렌디한 강조 */
+  text-transform: uppercase;
   letter-spacing: 1px;
 }
 
 .generate-btn:hover {
-  background: linear-gradient(90deg, #ff8a80, #896bff); /* 호버 시 살짝 밝게 */
+  background: linear-gradient(90deg, #ff8a80, #896bff);
 }
 
 .generate-btn:disabled {
@@ -110,7 +154,7 @@ audio::-webkit-media-controls-panel {
 .loading {
   margin-top: 20px;
   font-size: 1.2em;
-  color: #ffcc00; /* 네온 옐로우로 통일 */
+  color: #ffcc00;
   font-weight: 700;
 }
 

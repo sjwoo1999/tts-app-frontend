@@ -11,15 +11,31 @@
   <div class="container">
     <h1 class="title">TTS Vibe 🎙️</h1>
     <select id="voiceSelect" class="voice-select">
-      <option value="ko-KR-Wavenet-A">목소리 1 (여성, 기본)</option>
+      <option value="ko-KR-Wavenet-A">목소리 1 (남성)</option>
       <option value="ko-KR-Wavenet-B">목소리 2 (남성)</option>
       <option value="ko-KR-Wavenet-C">목소리 3 (여성)</option>
-      <option value="ko-KR-Wavenet-D">목소리 4 (남성)</option>
+      <option value="ko-KR-Wavenet-D">목소리 4 (여성)</option>
     </select>
-    <textarea
-      id="textInput"
-      placeholder="SSML 입력 (예: <speak>안녕!</speak>)"
-    ></textarea>
+
+    <div class="ssml-editor">
+      <div class="segment" data-id="1">
+        <input type="text" class="text-input" placeholder="텍스트 입력" value="어? 밥만 먹었는데 왜 갑자기 눈이 감기지? 이거 혹시 혈당 스파이크?"/>
+        <select class="rate-select">
+          <option value="1.05" selected>빠르게</option>
+          <option value="1.0">보통</option>
+          <option value="0.95">느리게</option>
+        </select>
+        <select class="emphasis-select">
+          <option value="none" selected>없음</option>
+          <option value="reduced">약하게</option>
+          <option value="moderate">보통</option>
+          <option value="strong">강하게</option>
+        </select>
+        <input type="text" class="break-input" placeholder="멈춤 (ms)" value="300ms"/>
+      </div>
+      <button class="add-segment">+ 세그먼트 추가</button>
+    </div>
+
     <button id="generateBtn" class="generate-btn">🎵 생성</button>
     <audio id="audioPlayer" controls></audio>
     <div id="loading" class="loading hidden">🔄 생성 중...</div>
@@ -27,15 +43,46 @@
 
   <script>
     const generateBtn = document.getElementById('generateBtn');
-    const textInput = document.getElementById('textInput');
     const audioPlayer = document.getElementById('audioPlayer');
     const voiceSelect = document.getElementById('voiceSelect');
     const loading = document.getElementById('loading');
+    const editor = document.querySelector('.ssml-editor');
+    const addSegmentBtn = document.querySelector('.add-segment');
+
+    let segmentCount = 1;
+
+    addSegmentBtn.addEventListener('click', () => {
+      segmentCount++;
+      const newSegment = document.createElement('div');
+      newSegment.className = 'segment';
+      newSegment.dataset.id = segmentCount;
+      newSegment.innerHTML = `
+        <input type="text" class="text-input" placeholder="텍스트 입력"/>
+        <select class="rate-select">
+          <option value="1.0" selected>보통</option>
+          <option value="1.05">빠르게</option>
+          <option value="0.95">느리게</option>
+        </select>
+        <select class="emphasis-select">
+          <option value="none" selected>없음</option>
+          <option value="reduced">약하게</option>
+          <option value="moderate">보통</option>
+          <option value="strong">강하게</option>
+        </select>
+        <input type="text" class="break-input" placeholder="멈춤 (ms)" value="0ms"/>
+      `;
+      editor.insertBefore(newSegment, addSegmentBtn);
+    });
 
     generateBtn.addEventListener('click', async () => {
-      const ssml = textInput.value || '<speak>기본 테스트</speak>';
+      const segments = Array.from(document.querySelectorAll('.segment')).map(segment => ({
+        text: segment.querySelector('.text-input').value,
+        rate: segment.querySelector('.rate-select').value,
+        emphasis: segment.querySelector('.emphasis-select').value,
+        break: segment.querySelector('.break-input').value
+      }));
       const voice = voiceSelect.value;
-      
+
       loading.classList.remove('hidden');
       generateBtn.disabled = true;
 
@@ -45,7 +92,7 @@
           {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ ssml, voice }),
+            body: JSON.stringify({ segments, voice })
           }
         );
         if (!response.ok) throw new Error('응답 실패');
